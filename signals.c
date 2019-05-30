@@ -58,6 +58,7 @@ int main (void) {
         }
         //if this is fathers process
         else if(pidForked>0) {
+             sleep(1);
             //saving this pid in an array
             pidArr[indexOfProcess]=pidForked;
             indexOfProcess++;
@@ -65,8 +66,10 @@ int main (void) {
         //if this is sons process
         else {
             valinum=indexOfProcess;
-            if (signal(SIGINT, sigCatcher) == SIG_ERR)
+            if (signal(SIGINT, sigCatcher) == SIG_ERR){
                 printf("\n ERROR---> SIGNAL CATCHER DIDNT SUCSEED! \n");
+                exit(1);
+            }
             printf("PID %d ready \n",getpid());
             break;
         }
