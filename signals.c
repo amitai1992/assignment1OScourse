@@ -88,7 +88,7 @@ int main (void) {
             printf("\n ERROR---> KILL {FATHER} DIDNT SUCSEED! \n");
         for(int i=0; i<5; i++) {
             deadPid=waitpid(pidArr[i], &stat, 0);
-            printf("%d is dead \n",deadPid);
+            printf("Process %d is dead \n",deadPid);
         }
         exit(1);
     }
