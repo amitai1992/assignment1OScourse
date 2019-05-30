@@ -19,6 +19,7 @@
 #include"md5.h"
 
 static int pipe_[2];
+static pid_t pid;
 
 //"checkResult" handler function for SIGINT
 void checkResult(int sig){
@@ -26,13 +27,12 @@ void checkResult(int sig){
     char* result = (char*)malloc(33*sizeof(char));
     uint length = read(pipe_[0], result, 32);
     if(length == 32)
-        std::cout << result << std::endl;
+        printf("encrypted by process %d : %s \n",pid,result);
     free(result);
     }
 }
 
 int main(){
-    pid_t pid;
     int ret;
     pid_t parentPid = getpid();
     ret = pipe(pipe_);
@@ -69,6 +69,7 @@ int main(){
     //parent
     else{
         std::string input;
+        printf("plain text: ");
         getline(std::cin, input);
         if(input.length() > 20){
             printf("Too long\n");
