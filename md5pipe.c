@@ -77,7 +77,7 @@ int main(){
         }
         write(pipe_[1],input.c_str() ,input.length());
         pause();//wait for child to finish
-        kill(pid, SIGINT);//kill child
+        kill(pid, SIGKILL);//kill child
         exit(EXIT_SUCCESS);
     }
 }
